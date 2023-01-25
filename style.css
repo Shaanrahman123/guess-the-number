@@ -1,0 +1,49 @@
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  column-gap: 20px;
+    padding: 20px 30px;
+}
+
+html {
+    font-family: sans-serif;
+  }
+
+  body {
+    height: 100vh;
+    background: linear-gradient(to top right, #9999ff 0%, #ffffcc 100%) no-repeat;
+  }
+  
+  .form input[type="number"] {
+    width: 6rem;
+    margin: auto;
+  }
+  .form input[type="submit"] {
+    padding: 5px 8px;
+    background-color: aliceblue;
+    color: black;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+
+  .lastResult {
+    color: white;
+    padding: 3px;
+  }
+
+  .form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  p{
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  h1{
+    text-transform: capitalize;
+  }

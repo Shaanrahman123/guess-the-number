@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess The Number: </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">Number guessing game</h1>
+        <p>Here you can select any number from 1 to 100. </p>
+        <div class="form">
+            <h3 id="chances"></h3>
+            <label for="guessField">Guess a Number : </label>
+            <input type="number" min="1" max="100" required id="guessField" class="guessField">
+            <input type="submit" value="Submit guess" class="guessSubmit">
+        </div>
+        <p class="guesses"></p>
+        <div class="resultParas">
+
+            <p class="lastResult"></p>
+            <p class="lowOrHi"></p>
+            <p class="reloading"></p>
+        </div>
+    </div>
+
+    <script>
+        let randomNumber = Math.floor(Math.random() * 100) + 1;
+        const guesses = document.querySelector('.guesses');
+        const chances = document.querySelector("#chances")
+        const lastResult = document.querySelector('.lastResult');
+        const lowOrHi = document.querySelector('.lowOrHi');
+        const guessSubmit = document.querySelector('.guessSubmit');
+        const guessField = document.querySelector('.guessField');
+        const reloading = document.querySelector('.reloading');
+        const container = document.querySelector('.container');
+        let guessCount = 1;
+        let count = 9
+
+        function checkGuess() {
+            const userGuess = Number(guessField.value);
+            if (guessCount === 1) {
+                guesses.textContent = 'Previous guesses are: ';
+            }
+
+            guesses.textContent += userGuess + ' ';
+            chances.textContent = "Chances left " + count;
+
+            if (userGuess === randomNumber) {
+                lastResult.textContent = 'Congratulations! You got it right!';
+                lastResult.style.backgroundColor = 'green';
+                lowOrHi.textContent = '';
+                guessSubmit.disabled = true;
+                setTimeout(reloadingg, 2000);
+                setTimeout(resetGame, 7000);
+                setTimeout(stop, 6000);
+
+            } else if (guessCount === 10) {
+                lastResult.textContent = '!!!GAME OVER!!!';
+                lastResult.style.textAlign = "center";
+                lowOrHi.textContent = '';
+                guessSubmit.disabled = true;
+                setTimeout(reloadingg, 2000);
+
+                setTimeout(resetGame, 7000);
+                setTimeout(stop, 6000);
+            } else {
+                lastResult.textContent = 'Wrong!';
+                lastResult.style.backgroundColor = 'red';
+                lastResult.style.textAlign = "center";
+                if (userGuess < randomNumber) {
+                    lowOrHi.textContent = 'Last guess was too low!';
+                    lowOrHi.style.textAlign = "center";
+
+                } else if (userGuess > randomNumber) {
+                    lowOrHi.textContent = 'Last guess was too high!';
+                    lowOrHi.style.textAlign = "center";
+                }
+            }
+            count--;
+            guessCount++;
+            guessField.value = '';
+            guessField.focus();
+        }
+
+        guessSubmit.addEventListener('click', checkGuess);
+
+
+
+        function resetGame() {
+            location.reload();
+        }
+        function reloadingg() {
+            reloading.textContent = "Game is reloading in 5 seconds"
+        }
+
+        function stop() {
+            window.stop();
+        }
+
+    </script>
+
+</html>
